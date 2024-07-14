@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <header>
+        <h1>Chess Game</h1>
+    </header>
+    <main>
+        <section class="game-container">
+            <div class="chessboard"></div>
+            <div class="game-info">
+                <h2>Game Info</h2>
+                <div id="current-turn">Current Turn: White</div>
+                <div id="game-status"></div>
+                <div class="move-history">
+                    <h3>Move History:</h3>
+                    <ul id="move-list"></ul>
+                </div>
+                <button id="flip-board">Flip Board</button>
+            </div>
+        </section>
+
+        <section id="chat-box">
+            <h2 class="bg-red-600c">Chat</h2>
+            <div id="chat-messages"></div>
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Type your message...">
+                <button id="chat-send">Send</button>
+            </div>
+        </section>
+    </main>
+
+    <div id="promotion-modal" class="hidden">
+        <div class="modal-content">
+            <h2>Choose Promotion Piece</h2>
+            <div id="promotion-options"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Developed by Manjeet Kumar.</p>
+    </footer>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="/javascripts/chessGame.js"></script>
+    <script src="/javascripts/chessUI.js"></script>
+</body>
+</html>
