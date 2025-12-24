@@ -27,6 +27,7 @@ io.on("connection", (socket) => {
             games[gameId] = {
                 chess: new Chess(),
                 players: {},
+                playerNames: {},
                 spectators: [],
                 moveHistory: []
             };
@@ -48,6 +49,32 @@ io.on("connection", (socket) => {
         socket.join(gameId);
         socket.emit("boardState", game.chess.fen());
         socket.emit("moveHistory", game.moveHistory);
+    });
+
+    socket.on("setPlayerName", ({ gameId, name }) => {
+        const game = games[gameId];
+        if (!game) return;
+        
+        // Store player name
+        if (socket.id === game.players.white) {
+            game.playerNames.white = name;
+        } else if (socket.id === game.players.black) {
+            game.playerNames.black = name;
+        }
+        
+        // Send player names to all clients
+        io.to(gameId).emit("playerNames", {
+            white: game.playerNames.white || null,
+            black: game.playerNames.black || null
+        });
+        
+        // If both players have names, notify that game is ready
+        if (game.playerNames.white && game.playerNames.black) {
+            io.to(gameId).emit("gameReady");
+        } else {
+            // Still waiting for the other player
+            socket.emit("waitingForOpponent");
+        }
     });
 
     socket.on("move", ({ gameId, move }) => {
@@ -83,16 +110,25 @@ io.on("connection", (socket) => {
     });
 
     socket.on("chatMessage", ({ gameId, message }) => {
-        console.log('Received chat message:', gameId, message); // Debug log
+        console.log('Received chat message:', gameId, message);
         const game = games[gameId];
         if (game) {
             let sender = "Spectator";
-            if (socket.id === game.players.white) sender = "White";
-            if (socket.id === game.players.black) sender = "Black";
-            console.log('Broadcasting message:', sender, message); // Debug log
-            io.to(gameId).emit("chatMessage", { sender, message });
+            let senderName = "Spectator";
+            
+            if (socket.id === game.players.white) {
+                sender = "White";
+                senderName = game.playerNames.white || "White Player";
+            }
+            if (socket.id === game.players.black) {
+                sender = "Black";
+                senderName = game.playerNames.black || "Black Player";
+            }
+            
+            console.log('Broadcasting message:', senderName, message);
+            io.to(gameId).emit("chatMessage", { sender, message, senderName });
         } else {
-            console.log('Game not found:', gameId); // Debug log
+            console.log('Game not found:', gameId);
         }
     });
 

@@ -353,6 +353,38 @@ socket.on("playerLeft", (color) => {
     showInfoModal('Player Left', `${color} player has left the game.`);
 });
 
+// Player name events
+socket.on('playerNames', ({ white, black }) => {
+    if (typeof updatePlayerNames === 'function') {
+        updatePlayerNames(white, black);
+    }
+    
+    // Store opponent name
+    if (playerRole === 'w') {
+        opponentName = black;
+    } else if (playerRole === 'b') {
+        opponentName = white;
+    }
+    
+    // Hide waiting modal when both players are ready
+    if (white && black && typeof hideWaitingModal === 'function') {
+        hideWaitingModal();
+    }
+});
+
+socket.on('waitingForOpponent', () => {
+    if (typeof showWaitingModal === 'function') {
+        showWaitingModal();
+    }
+});
+
+socket.on('gameReady', () => {
+    if (typeof hideWaitingModal === 'function') {
+        hideWaitingModal();
+    }
+});
+
+
 // Chat functionality
 const chatMessagesElement = document.getElementById('chat-messages');
 const chatInputElement = document.getElementById('chat-input');
@@ -374,7 +406,7 @@ chatInputElement.addEventListener('keypress', (e) => {
 
 chatSendButton.addEventListener('click', sendChatMessage);
 
-socket.on('chatMessage', ({ sender, message }) => {
+socket.on('chatMessage', ({ sender, message, senderName }) => {
     const messageElement = document.createElement('div');
     messageElement.className = 'chat-message';
     
@@ -404,7 +436,8 @@ socket.on('chatMessage', ({ sender, message }) => {
     // Create message structure
     const senderElement = document.createElement('div');
     senderElement.className = 'sender';
-    senderElement.textContent = sender;
+    // Use senderName from server if available, otherwise use sender
+    senderElement.textContent = senderName || sender;
     
     const messageText = document.createElement('div');
     messageText.className = 'message-text';

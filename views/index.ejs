@@ -105,6 +105,29 @@
         </section>
     </main>
 
+    <!-- Player Name Input Modal -->
+    <div id="name-input-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">👤</div>
+            <h2>Welcome to Chess Game!</h2>
+            <p>Please enter your name to start playing</p>
+            <input type="text" id="player-name-input" placeholder="Enter your name" maxlength="20" autocomplete="off">
+            <button id="name-submit-btn" class="btn-primary">Start Game</button>
+        </div>
+    </div>
+
+    <!-- Waiting for Player Modal -->
+    <div id="waiting-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-icon">⏳</div>
+            <h2>Waiting for Opponent</h2>
+            <p id="waiting-message">Waiting for another player to join...</p>
+            <div class="loading-dots">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Game Over Modal -->
     <div id="game-over-modal" class="modal hidden">
         <div class="modal-content">
@@ -144,6 +167,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     <script src="/javascripts/modals.js"></script>
+    <script src="/javascripts/playerNames.js"></script>
     <script src="/javascripts/chessGame.js"></script>
     <script src="/javascripts/chessUI.js"></script>
 </body>
