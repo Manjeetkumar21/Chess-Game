@@ -1,0 +1,481 @@
+/* Mobile Responsive Styles */
+
+/* Tablet and smaller laptops */
+@media (max-width: 1200px) {
+    body {
+        overflow-y: auto;
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .game-info,
+    #chat-box {
+        max-height: 400px;
+    }
+
+    .game-container {
+        order: 1;
+    }
+
+    .game-info {
+        order: 2;
+    }
+
+    #chat-box {
+        order: 3;
+    }
+
+    .chessboard {
+        grid-template-columns: repeat(8, 55px);
+        grid-template-rows: repeat(8, 55px);
+    }
+
+    .square {
+        width: 55px;
+        height: 55px;
+    }
+
+    .piece {
+        font-size: 42px;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    header {
+        padding: var(--spacing-sm) var(--spacing-md);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--bg-secondary);
+    }
+
+    header h1 {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    main {
+        padding: var(--spacing-sm);
+        gap: var(--spacing-sm);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .game-container {
+        padding-block: 2rem;
+        width: 100%;
+        min-height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: var(--spacing-sm);
+        background: transparent;
+    }
+
+    .board-wrapper {
+        border: 1px solid var(--dark-square);
+        height: auto;
+        grid-template-columns: 22px 1fr 22px;
+        grid-template-rows: 22px 1fr 22px;
+        margin-bottom: 0;
+        border-radius: 15px;
+    }
+
+    .chessboard {
+        grid-template-columns: repeat(8, 40px);
+        grid-template-rows: repeat(8, 40px);
+        border-width: 5px;
+    }
+
+    .square {
+        width: 40px;
+        height: 40px;
+    }
+
+    .piece {
+        font-size: 30px;
+    }
+
+    .coordinates {
+        font-size: 0.65rem;
+    }
+
+    .game-info {
+        width: 100%;
+        padding: var(--spacing-sm);
+        background: var(--bg-secondary);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        min-height: 400px;
+        height: 100%;
+    }
+
+    .game-info h2 {
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-xs);
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+    }
+
+    .player-card {
+        padding: var(--spacing-xs);
+        margin-bottom: var(--spacing-xs);
+        background: rgba(51, 65, 85, 0.2);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .player-card .player-name {
+        font-size: 0.75rem;
+        margin-bottom: 0;
+    }
+
+    .player-card .player-color {
+        width: 8px;
+        height: 8px;
+    }
+
+    .captured-pieces {
+        display: none;
+    }
+
+    #current-turn {
+        font-size: 0.75rem;
+        padding: 4px var(--spacing-xs);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    #game-status {
+        font-size: 0.85rem;
+        padding: var(--spacing-xs);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .move-history {
+        margin-top: var(--spacing-xs);
+    }
+
+    .move-history h3 {
+        font-size: 0.8rem;
+        margin-bottom: var(--spacing-xs);
+    }
+
+    #move-list {
+        max-height: 100px;
+        padding: var(--spacing-xs);
+    }
+
+    #move-list li {
+        font-size: 0.7rem;
+        padding: 2px var(--spacing-xs);
+        margin-bottom: 1px;
+    }
+
+    .game-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-xs);
+        margin-top: var(--spacing-xs);
+    }
+
+    .game-controls button {
+        width: 100%;
+        padding: var(--spacing-xs);
+        font-size: 0.75rem;
+    }
+
+    #chat-box {
+        width: 100%;
+        padding: var(--spacing-sm);
+        background: var(--bg-secondary);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        min-height: 300px;
+    }
+
+    #chat-box h2 {
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-xs);
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+    }
+
+    #chat-messages {
+        height: 180px;
+        max-height: 180px;
+        margin-bottom: var(--spacing-xs);
+        padding: var(--spacing-xs);
+    }
+
+    .chat-message {
+        font-size: 0.75rem;
+        max-width: 70%;
+        padding: 4px var(--spacing-xs);
+        margin-bottom: 4px;
+    }
+
+    .chat-message .sender {
+        font-size: 0.65rem;
+        margin-bottom: 2px;
+    }
+
+    .chat-message .message-text {
+        line-height: 1.3;
+    }
+
+    .chat-input-container {
+        gap: var(--spacing-xs);
+    }
+
+    #chat-input {
+        padding: var(--spacing-xs);
+        font-size: 0.8rem;
+        border-radius: var(--radius-sm);
+    }
+
+    #chat-send {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.8rem;
+    }
+
+    /* Modals */
+    .modal-content {
+        padding: var(--spacing-md);
+        width: 90%;
+        max-width: 350px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.25rem;
+    }
+
+    .modal-content p {
+        font-size: 0.9rem;
+    }
+
+    .modal-icon {
+        font-size: 2.5rem;
+    }
+
+    .promotion-piece {
+        font-size: 2.5rem;
+        padding: var(--spacing-xs);
+    }
+
+    button {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.8rem;
+    }
+
+    footer {
+        padding: var(--spacing-sm);
+        font-size: 0.7rem;
+        background: var(--bg-secondary);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 0.9rem;
+    }
+
+    main {
+        padding: 4px;
+        gap: 4px;
+    }
+
+    .game-container {
+        padding: 4px;
+    }
+
+    .board-wrapper {
+        grid-template-columns: 18px 1fr 18px;
+        grid-template-rows: 18px 1fr 18px;
+    }
+
+    .chessboard {
+        grid-template-columns: repeat(8, 36px);
+        grid-template-rows: repeat(8, 36px);
+        border-width: 4px;
+    }
+
+    .square {
+        width: 36px;
+        height: 36px;
+    }
+
+    .piece {
+        font-size: 26px;
+    }
+
+    .coordinates {
+        font-size: 0.6rem;
+    }
+
+    .game-info,
+    #chat-box {
+        padding: var(--spacing-xs);
+    }
+
+    .game-info h2,
+    #chat-box h2 {
+        font-size: 0.85rem;
+    }
+
+    #chat-messages {
+        height: 150px;
+    }
+
+    .modal-content {
+        padding: var(--spacing-sm);
+        width: 95%;
+    }
+
+    .modal-content h2 {
+        font-size: 1.1rem;
+    }
+
+    .modal-icon {
+        font-size: 2rem;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .modal-buttons button {
+        max-width: 100%;
+    }
+
+    #promotion-options {
+        gap: var(--spacing-xs);
+    }
+
+    .promotion-piece {
+        font-size: 2rem;
+        padding: 4px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .chessboard {
+        grid-template-columns: repeat(8, 32px);
+        grid-template-rows: repeat(8, 32px);
+        border-width: 3px;
+    }
+
+    .square {
+        width: 32px;
+        height: 32px;
+    }
+
+    .piece {
+        font-size: 24px;
+    }
+
+    .board-wrapper {
+        grid-template-columns: 16px 1fr 16px;
+        grid-template-rows: 16px 1fr 16px;
+    }
+
+    .coordinates {
+        font-size: 0.55rem;
+    }
+}
+
+/* Landscape orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+    main {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-xs);
+    }
+
+    .game-container {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        padding: var(--spacing-xs);
+    }
+
+    .game-info {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    #chat-box {
+        grid-column: 1 / 3;
+        grid-row: 2 / 3;
+    }
+
+    .chessboard {
+        grid-template-columns: repeat(8, 34px);
+        grid-template-rows: repeat(8, 34px);
+    }
+
+    .square {
+        width: 34px;
+        height: 34px;
+    }
+
+    .piece {
+        font-size: 25px;
+    }
+
+    #chat-messages {
+        height: 120px;
+    }
+}
+
+/* Touch improvements */
+@media (hover: none) and (pointer: coarse) {
+    .square {
+        cursor: default;
+    }
+
+    .piece {
+        cursor: default;
+    }
+
+    button {
+        min-height: 40px;
+        touch-action: manipulation;
+    }
+
+    .promotion-piece {
+        min-width: 55px;
+        min-height: 55px;
+    }
+}
+
+/* Smooth scrolling */
+@media (max-width: 768px) {
+    html {
+        scroll-behavior: smooth;
+    }
+}

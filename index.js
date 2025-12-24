@@ -96,6 +96,22 @@ io.on("connection", (socket) => {
         }
     });
 
+    socket.on("resign", ({ gameId }) => {
+        const game = games[gameId];
+        if (!game) return;
+
+        let winner = null;
+        if (socket.id === game.players.white) {
+            winner = "Black";
+        } else if (socket.id === game.players.black) {
+            winner = "White";
+        }
+
+        if (winner) {
+            io.to(gameId).emit("gameOver", `${winner} wins by resignation`);
+        }
+    });
+
     socket.on("disconnect", () => {
         for (const gameId in games) {
             const game = games[gameId];
